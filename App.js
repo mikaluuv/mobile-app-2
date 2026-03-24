@@ -1,85 +1,53 @@
-import { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Button,
-  Switch,
-} from "react-native";
-import ProductCard from "./components/ProductCard";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import HomeScreen from "./screens/HomeScreen";
+import ProductDetail from "./screens/ProductDetail";
+
+const Stack = createNativeStackNavigator();
+
+const products = [
+  {
+    id: 1,
+    type: "product",
+    title: "Nike Air Force 1",
+    description: "Klassieke witte sneaker",
+    price: "€120",
+    details: "Comfortabele sneaker die bij alles past.",
+  },
+  {
+    id: 2,
+    type: "product",
+    title: "Nike Dunk Low",
+    description: "Populaire street sneaker",
+    price: "€110",
+    details: "Perfect voor dagelijks gebruik.",
+  },
+];
+
+const blogs = [
+  {
+    id: 1,
+    type: "blog",
+    title: "Beste sneakers 2026",
+    description: "Top sneakers van dit jaar",
+    price: "Blog",
+    details: "Dit zijn de populairste sneakers van 2026.",
+  },
+];
 
 export default function App() {
-  const [text, setText] = useState("");
-  const [isEnabled, setIsEnabled] = useState(false);
-
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Mijn App</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Typ iets..."
-        value={text}
-        onChangeText={setText}
-      />
-
-      <View style={styles.row}>
-        <Text>Switch</Text>
-        <Switch value={isEnabled} onValueChange={setIsEnabled} />
-      </View>
-
-      <Button title="Klik mij" onPress={() => alert("Klik!")} />
-
-      <Pressable style={styles.button} onPress={() => alert("Pressable")}>
-        <Text style={styles.buttonText}>Druk hier</Text>
-      </Pressable>
-
-      <Text style={styles.subtitle}>Producten</Text>
-
-      <ProductCard />
-      <ProductCard />
-    </ScrollView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          initialParams={{ products, blogs }}
+        />
+        <Stack.Screen name="Details" component={ProductDetail} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    backgroundColor: "#f5f5f5",
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 10,
-    fontWeight: "bold",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: "white",
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 10,
-    alignItems: "center",
-  },
-  button: {
-    backgroundColor: "black",
-    padding: 10,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: "white",
-  },
-  subtitle: {
-    marginTop: 20,
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-});
