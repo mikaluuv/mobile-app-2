@@ -152,9 +152,14 @@ const HomeScreen = ({ route }) => {
     .filter((product) =>
       product.title.toLowerCase().includes(searchText.toLowerCase()),
     )
-    .filter((product) =>
-      selectedCategory ? selectedCategory !== "blog" : true,
-    )
+    .filter((product) => {
+      if (!selectedCategory) {
+        return true;
+      }
+
+      return product.type === selectedCategory;
+    })
+
     .sort((a, b) => {
       const priceA = Number.parseFloat(String(a.price).replace(/[^\d.]/g, ""));
       const priceB = Number.parseFloat(String(b.price).replace(/[^\d.]/g, ""));
@@ -170,7 +175,6 @@ const HomeScreen = ({ route }) => {
     .filter((blog) =>
       blog.title.toLowerCase().includes(searchText.toLowerCase()),
     )
-    .filter((blog) => (selectedCategory ? selectedCategory === "blog" : true))
     .sort((a, b) => {
       if (sortOption === "title-asc") return a.title.localeCompare(b.title);
       if (sortOption === "title-desc") return b.title.localeCompare(a.title);
