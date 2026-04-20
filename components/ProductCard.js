@@ -33,7 +33,7 @@ export default function ProductCard({
           }
         >
           <Text style={styles.buttonText}>
-            {type === "blog" ? "Lees blog" : "Bekijk sneaker"}
+            {type === "blog" ? "Lees blog" : "Bekijk product"}
           </Text>
         </Pressable>
       </View>
@@ -43,53 +43,51 @@ export default function ProductCard({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff7ed",
-    borderRadius: 24,
+    backgroundColor: "#fffaf5",
+    borderRadius: 22,
     width: "48%",
-    marginBottom: 18,
+    marginBottom: 16,
     overflow: "hidden",
-    borderWidth: 1,
-    borderColor: "#fdba74",
-    shadowColor: "#ea580c",
-    shadowOpacity: 0.12,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 10 },
-    elevation: 6,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 4,
   },
   image: {
     width: "100%",
-    height: 150,
-    backgroundColor: "#ffedd5",
+    height: 140,
+    backgroundColor: "#f2e4d7",
   },
   content: {
-    padding: 15,
+    padding: 14,
   },
   title: {
     fontWeight: "800",
-    fontSize: 17,
-    color: "#7c2d12",
-    marginBottom: 8,
+    fontSize: 16,
+    color: "#2f241f",
+    marginBottom: 7,
   },
   description: {
-    color: "#9a3412",
+    color: "#6c5e56",
     fontSize: 13,
-    lineHeight: 19,
-    minHeight: 54,
-    marginBottom: 12,
+    lineHeight: 18,
+    minHeight: 52,
+    marginBottom: 10,
   },
   price: {
-    color: "#c2410c",
+    color: "#b85c38",
     fontWeight: "800",
     fontSize: 16,
-    marginBottom: 14,
+    marginBottom: 12,
   },
   button: {
-    backgroundColor: "#ea580c",
-    paddingVertical: 12,
+    backgroundColor: "#2f241f",
+    paddingVertical: 11,
     borderRadius: 14,
   },
   buttonText: {
-    color: "#fff7ed",
+    color: "#fffaf5",
     textAlign: "center",
     fontWeight: "700",
     fontSize: 13,
