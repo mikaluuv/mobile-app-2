@@ -28,22 +28,22 @@ const ProductDetail = ({ route, navigation }) => {
 
       <View style={styles.card}>
         <Text style={styles.label}>
-          {isBlog ? "Blog details" : "Sneaker details"}
+          {isBlog ? "Blog details" : "Product details"}
         </Text>
-        <Text style={styles.title}>{product?.title || "ASICS Street Runner"}</Text>
-        <Text style={styles.price}>{product?.price || "EUR 129"}</Text>
+        <Text style={styles.title}>{product?.title || "Smart Sneaker"}</Text>
+        <Text style={styles.price}>{product?.price || "EUR 129.95"}</Text>
 
         <Text style={styles.sectionTitle}>Beschrijving</Text>
         <Text style={styles.description}>
           {product?.description ||
-            "Comfortabele sneaker met een moderne look voor dagelijks gebruik."}
+            "Stijlvolle sneaker met een moderne look voor dagelijks gebruik."}
         </Text>
 
         <View style={styles.infoBox}>
           <Text style={styles.infoTitle}>Alle details</Text>
           <Text style={styles.infoText}>
             {product?.details ||
-              "Deze sneaker combineert een lichte feel, stevige zool en een opvallende afwerking voor een sportieve streetwear stijl."}
+              "Deze sneaker combineert comfort, stijl en een sterke afwerking voor elke dag."}
           </Text>
         </View>
 
@@ -78,111 +78,101 @@ const ProductDetail = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fffaf5",
+    backgroundColor: "#f4ede6",
   },
   content: {
     padding: 18,
-    paddingBottom: 44,
+    paddingBottom: 36,
   },
   backButton: {
     alignSelf: "flex-start",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#2f241f",
     paddingHorizontal: 18,
     paddingVertical: 10,
-    borderRadius: 999,
-    marginBottom: 18,
-    borderWidth: 1,
-    borderColor: "#fdba74",
+    borderRadius: 14,
+    marginBottom: 16,
   },
   backText: {
-    color: "#7c2d12",
+    color: "#fffaf5",
     textAlign: "center",
     fontWeight: "700",
   },
   image: {
     width: "100%",
-    height: 300,
-    borderRadius: 28,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "#fdba74",
+    height: 260,
+    borderRadius: 24,
+    marginBottom: 18,
   },
   card: {
-    backgroundColor: "#ffedd5",
-    padding: 22,
-    borderRadius: 28,
-    borderWidth: 1,
-    borderColor: "#fdba74",
-    shadowColor: "#ea580c",
-    shadowOpacity: 0.14,
-    shadowRadius: 22,
-    shadowOffset: { width: 0, height: 12 },
-    elevation: 8,
+    backgroundColor: "#fffaf5",
+    padding: 20,
+    borderRadius: 24,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 4,
   },
   label: {
-    color: "#c2410c",
-    fontSize: 12,
+    color: "#b85c38",
+    fontSize: 13,
     fontWeight: "800",
     textTransform: "uppercase",
     marginBottom: 8,
-    letterSpacing: 1.8,
+    letterSpacing: 0.8,
   },
   title: {
-    color: "#7c2d12",
-    fontSize: 32,
-    fontWeight: "800",
-    marginBottom: 10,
-  },
-  price: {
-    color: "#ea580c",
-    fontWeight: "800",
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    color: "#7c2d12",
-    fontSize: 16,
+    color: "#2f241f",
+    fontSize: 30,
     fontWeight: "800",
     marginBottom: 8,
   },
-  description: {
-    color: "#9a3412",
-    fontSize: 15,
-    lineHeight: 24,
+  price: {
+    color: "#b85c38",
+    fontWeight: "800",
+    fontSize: 20,
     marginBottom: 18,
   },
+  sectionTitle: {
+    color: "#2f241f",
+    fontSize: 16,
+    fontWeight: "800",
+    marginBottom: 6,
+  },
+  description: {
+    color: "#6c5e56",
+    fontSize: 15,
+    lineHeight: 22,
+    marginBottom: 16,
+  },
   infoBox: {
-    backgroundColor: "#ffffff",
-    borderRadius: 22,
-    padding: 16,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "#fed7aa",
+    backgroundColor: "#f2e4d7",
+    borderRadius: 18,
+    padding: 15,
+    marginBottom: 18,
   },
   infoTitle: {
     fontWeight: "800",
     fontSize: 16,
-    color: "#7c2d12",
-    marginBottom: 8,
+    color: "#2f241f",
+    marginBottom: 6,
   },
   infoText: {
-    color: "#9a3412",
-    lineHeight: 22,
+    color: "#6c5e56",
+    lineHeight: 21,
     fontSize: 14,
   },
   quantityBox: {
-    backgroundColor: "#ffffff",
-    borderRadius: 22,
-    padding: 16,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: "#fed7aa",
+    backgroundColor: "#f8f1ea",
+    borderRadius: 18,
+    padding: 15,
+    marginBottom: 18,
   },
   quantityLabel: {
-    color: "#7c2d12",
+    color: "#2f241f",
     fontSize: 16,
     fontWeight: "800",
-    marginBottom: 12,
+    marginBottom: 10,
   },
   quantityControls: {
     flexDirection: "row",
@@ -190,36 +180,31 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   quantityButton: {
-    backgroundColor: "#ea580c",
-    width: 46,
-    height: 46,
-    borderRadius: 14,
+    backgroundColor: "#2f241f",
+    width: 42,
+    height: 42,
+    borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
   },
   quantityButtonText: {
-    color: "#fff7ed",
+    color: "#fffaf5",
     fontSize: 20,
     fontWeight: "800",
   },
   quantityText: {
-    color: "#7c2d12",
+    color: "#2f241f",
     fontSize: 20,
     fontWeight: "800",
   },
   buyButton: {
-    backgroundColor: "#c2410c",
-    paddingVertical: 16,
-    borderRadius: 18,
+    backgroundColor: "#b85c38",
+    paddingVertical: 14,
+    borderRadius: 16,
     alignItems: "center",
-    shadowColor: "#c2410c",
-    shadowOpacity: 0.24,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 6,
   },
   buyButtonText: {
-    color: "#fff7ed",
+    color: "#fffaf5",
     fontWeight: "800",
     fontSize: 15,
   },
