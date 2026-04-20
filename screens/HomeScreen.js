@@ -261,6 +261,10 @@ const HomeScreen = ({ route }) => {
         </Text>
       </View>
 
+      <Text style={styles.resultCount}>
+        {filteredProducts.length} sneakers gevonden
+      </Text>
+
       <View style={styles.grid}>
         {filteredProducts.map((product) => (
           <ProductCard
@@ -283,6 +287,10 @@ const HomeScreen = ({ route }) => {
             : "Klik op een blog om de volledige inhoud te bekijken."}
         </Text>
       </View>
+
+      <Text style={styles.resultCount}>
+        {filteredBlogs.length} blogs gevonden
+      </Text>
 
       <View style={styles.grid}>
         {filteredBlogs.map((blog) => (
@@ -414,6 +422,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "700",
     fontSize: 16,
+  },
+  resultCount: {
+    color: "#1f4432",
+    fontSize: 13,
+    fontWeight: "600",
+    marginTop: 6,
   },
 });
 
