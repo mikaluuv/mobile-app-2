@@ -78,7 +78,7 @@ const ProductDetail = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f4ede6",
+    backgroundColor: "#f5f5f5",
   },
   content: {
     padding: 18,
@@ -86,14 +86,14 @@ const styles = StyleSheet.create({
   },
   backButton: {
     alignSelf: "flex-start",
-    backgroundColor: "#2f241f",
+    backgroundColor: "black",
     paddingHorizontal: 18,
     paddingVertical: 10,
     borderRadius: 14,
     marginBottom: 16,
   },
   backText: {
-    color: "#fffaf5",
+    color: "#f5f5f5",
     textAlign: "center",
     fontWeight: "700",
   },
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
   card: {
-    backgroundColor: "#fffaf5",
+    backgroundColor: "#ffffff",
     padding: 20,
     borderRadius: 24,
     shadowColor: "#000",
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   label: {
-    color: "#b85c38",
+    color: "#black",
     fontSize: 13,
     fontWeight: "800",
     textTransform: "uppercase",
@@ -122,13 +122,13 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
   },
   title: {
-    color: "#2f241f",
+    color: "black",
     fontSize: 30,
     fontWeight: "800",
     marginBottom: 8,
   },
   price: {
-    color: "#b85c38",
+    color: "#1f4432",
     fontWeight: "800",
     fontSize: 20,
     marginBottom: 18,
@@ -140,13 +140,13 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   description: {
-    color: "#6c5e56",
+    color: "grey",
     fontSize: 15,
     lineHeight: 22,
     marginBottom: 16,
   },
   infoBox: {
-    backgroundColor: "#f2e4d7",
+    backgroundColor: "#f6f6f6",
     borderRadius: 18,
     padding: 15,
     marginBottom: 18,
@@ -154,22 +154,22 @@ const styles = StyleSheet.create({
   infoTitle: {
     fontWeight: "800",
     fontSize: 16,
-    color: "#2f241f",
+    color: "black",
     marginBottom: 6,
   },
   infoText: {
-    color: "#6c5e56",
+    color: "black",
     lineHeight: 21,
     fontSize: 14,
   },
   quantityBox: {
-    backgroundColor: "#f8f1ea",
+    backgroundColor: "#f5f5f5",
     borderRadius: 18,
     padding: 15,
     marginBottom: 18,
   },
   quantityLabel: {
-    color: "#2f241f",
+    color: "black",
     fontSize: 16,
     fontWeight: "800",
     marginBottom: 10,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   quantityButton: {
-    backgroundColor: "#2f241f",
+    backgroundColor: "#1f4432",
     width: 42,
     height: 42,
     borderRadius: 12,
@@ -188,17 +188,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   quantityButtonText: {
-    color: "#fffaf5",
+    color: "#1f4432",
     fontSize: 20,
     fontWeight: "800",
   },
   quantityText: {
-    color: "#2f241f",
+    color: "#1f4432",
     fontSize: 20,
     fontWeight: "800",
   },
   buyButton: {
-    backgroundColor: "#b85c38",
+    backgroundColor: "#1f4432",
     paddingVertical: 14,
     borderRadius: 16,
     alignItems: "center",

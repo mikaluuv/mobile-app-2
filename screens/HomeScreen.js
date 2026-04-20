@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import { Pressable } from "react-native";
 import {
   View,
   Text,
@@ -61,12 +62,15 @@ const HomeScreen = ({ route }) => {
     const fetchData = async () => {
       try {
         const [productsResponse, blogsResponse] = await Promise.all([
-          fetch(`https://api.webflow.com/v2/sites/${WEBFLOW_SITE_ID}/products`, {
-            headers: {
-              Authorization: `Bearer ${WEBFLOW_TOKEN}`,
-              accept: "application/json",
+          fetch(
+            `https://api.webflow.com/v2/sites/${WEBFLOW_SITE_ID}/products`,
+            {
+              headers: {
+                Authorization: `Bearer ${WEBFLOW_TOKEN}`,
+                accept: "application/json",
+              },
             },
-          }),
+          ),
           fetch(
             `https://api.webflow.com/v2/collections/${BLOG_COLLECTION_ID}/items`,
             {
@@ -127,7 +131,9 @@ const HomeScreen = ({ route }) => {
           })),
         );
       } catch (error) {
-        console.error("Error fetching Webflow data:", error);
+        console.log("FULL ERROR:", error);
+        console.log("ERROR MESSAGE:", error?.message);
+        console.log("ERROR NAME:", error?.name);
       } finally {
         if (isMounted) {
           setIsLoading(false);
@@ -164,9 +170,7 @@ const HomeScreen = ({ route }) => {
     .filter((blog) =>
       blog.title.toLowerCase().includes(searchText.toLowerCase()),
     )
-    .filter((blog) =>
-      selectedCategory ? selectedCategory === "blog" : true,
-    )
+    .filter((blog) => (selectedCategory ? selectedCategory === "blog" : true))
     .sort((a, b) => {
       if (sortOption === "title-asc") return a.title.localeCompare(b.title);
       if (sortOption === "title-desc") return b.title.localeCompare(a.title);
@@ -229,13 +233,15 @@ const HomeScreen = ({ route }) => {
         <Switch
           value={isEnabled}
           onValueChange={() => setIsEnabled(!isEnabled)}
-          trackColor={{ false: "#d8c8bc", true: "#d28a63" }}
+          trackColor={{ false: "#d9d9d9", true: "#1f4432" }}
           thumbColor="#ffffff"
         />
       </View>
 
       <View style={styles.buttonWrap}>
-        <Button title="Filter producten" color="#b85c38" onPress={() => {}} />
+        <Pressable style={styles.customButton} onPress={() => {}}>
+          <Text style={styles.customButtonText}>Filter producten</Text>
+        </Pressable>
       </View>
 
       <View style={styles.sectionHeader}>
@@ -290,14 +296,14 @@ const HomeScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f4ede6",
+    backgroundColor: "#f5f5f5",
   },
   content: {
     padding: 18,
     paddingBottom: 36,
   },
   hero: {
-    backgroundColor: "#fffaf5",
+    backgroundColor: "#ffffff",
     borderRadius: 28,
     padding: 18,
     marginBottom: 18,
@@ -308,7 +314,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   kicker: {
-    color: "#b85c38",
+    color: "black",
     fontSize: 13,
     fontWeight: "800",
     textTransform: "uppercase",
@@ -316,13 +322,13 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
   },
   title: {
-    color: "#2f241f",
+    color: "#1f4432",
     fontSize: 30,
     fontWeight: "800",
     marginBottom: 8,
   },
   subtitle: {
-    color: "#6d5f56",
+    color: "black",
     fontSize: 15,
     lineHeight: 22,
     marginBottom: 16,
@@ -333,12 +339,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   picker: {
-    backgroundColor: "#fffaf5",
+    backgroundColor: "#ffffff",
     marginBottom: 14,
     borderRadius: 16,
   },
   search: {
-    backgroundColor: "#fffaf5",
+    backgroundColor: "#ffffff",
     paddingHorizontal: 14,
     paddingVertical: 14,
     borderRadius: 16,
@@ -347,7 +353,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   controls: {
-    backgroundColor: "#fffaf5",
+    backgroundColor: "#ffffff",
     borderRadius: 18,
     padding: 16,
     marginBottom: 14,
@@ -356,13 +362,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   controlTitle: {
-    color: "#2f241f",
+    color: "#1f4432",
     fontWeight: "700",
     fontSize: 15,
     marginBottom: 3,
   },
   controlText: {
-    color: "#7e7066",
+    color: "black",
     fontSize: 12,
   },
   buttonWrap: {
@@ -374,13 +380,13 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
   sectionTitle: {
-    color: "#2f241f",
+    color: "#1f4432",
     fontSize: 24,
     fontWeight: "800",
     marginBottom: 4,
   },
   sectionText: {
-    color: "#75675f",
+    color: "#1f4432",
     fontSize: 14,
     lineHeight: 20,
   },
@@ -388,6 +394,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+  },
+  customButton: {
+    backgroundColor: "#1f4432",
+    paddingVertical: 14,
+    borderRadius: 16,
+    alignItems: "center",
+  },
+
+  customButtonText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
   },
 });
 

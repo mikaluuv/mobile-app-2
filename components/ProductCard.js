@@ -43,7 +43,7 @@ export default function ProductCard({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fffaf5",
+    backgroundColor: "#ffffff",
     borderRadius: 22,
     width: "48%",
     marginBottom: 16,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 140,
-    backgroundColor: "#f2e4d7",
+    backgroundColor: "#f6f6f6",
   },
   content: {
     padding: 14,
@@ -65,24 +65,24 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "800",
     fontSize: 16,
-    color: "#2f241f",
+    color: "black",
     marginBottom: 7,
   },
   description: {
-    color: "#6c5e56",
+    color: "black",
     fontSize: 13,
     lineHeight: 18,
     minHeight: 52,
     marginBottom: 10,
   },
   price: {
-    color: "#b85c38",
+    color: "#1f4432",
     fontWeight: "800",
     fontSize: 16,
     marginBottom: 12,
   },
   button: {
-    backgroundColor: "#2f241f",
+    backgroundColor: "#1f4432",
     paddingVertical: 11,
     borderRadius: 14,
   },
