@@ -56,6 +56,12 @@ const HomeScreen = ({ route }) => {
   const [blogsList, setBlogs] = useState(blogs);
   const [isLoading, setIsLoading] = useState(true);
 
+  const resetFilters = () => {
+    setSearchText("");
+    setSelectedCategory("");
+    setSortOption("price-asc");
+  };
+
   useEffect(() => {
     let isMounted = true;
 
@@ -242,11 +248,9 @@ const HomeScreen = ({ route }) => {
         />
       </View>
 
-      <View style={styles.buttonWrap}>
-        <Pressable style={styles.customButton} onPress={() => {}}>
-          <Text style={styles.customButtonText}>Filter producten</Text>
-        </Pressable>
-      </View>
+      <Pressable style={styles.customButton} onPress={resetFilters}>
+        <Text style={styles.customButtonText}>Reset filters</Text>
+      </Pressable>
 
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>Populaire sneakers</Text>
