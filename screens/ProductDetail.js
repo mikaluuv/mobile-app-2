@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   View,
@@ -12,6 +12,17 @@ import {
 const ProductDetail = ({ route, navigation }) => {
   const { product } = route.params || {};
   const isBlog = product?.type === "blog";
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -61,15 +72,21 @@ const ProductDetail = ({ route, navigation }) => {
               <Text style={styles.quantityLabel}>Aantal</Text>
 
               <View style={styles.quantityControls}>
-                <Pressable style={styles.quantityButton}>
+                <Pressable
+                  style={styles.quantityButton}
+                  onPress={decreaseQuantity}
+                >
                   <Text style={styles.quantityButtonText}>-</Text>
                 </Pressable>
 
                 <View style={styles.quantityValueBox}>
-                  <Text style={styles.quantityText}>1</Text>
+                  <Text style={styles.quantityText}>{quantity}</Text>
                 </View>
 
-                <Pressable style={styles.quantityButton}>
+                <Pressable
+                  style={styles.quantityButton}
+                  onPress={increaseQuantity}
+                >
                   <Text style={styles.quantityButtonText}>+</Text>
                 </Pressable>
               </View>
