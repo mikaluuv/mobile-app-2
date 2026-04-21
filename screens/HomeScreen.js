@@ -46,7 +46,7 @@ const formatPrice = (priceData) => {
 };
 
 const HomeScreen = ({ route }) => {
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortOption, setSortOption] = useState("price-asc");
@@ -203,10 +203,12 @@ const HomeScreen = ({ route }) => {
         </Text>
       </View>
 
-      <Image
-        source={require("../assets/sne.webp")}
-        style={styles.bannerImage}
-      />
+      {showBanner ? (
+        <Image
+          source={require("../assets/sne.webp")}
+          style={styles.bannerImage}
+        />
+      ) : null}
 
       <View style={styles.searchCard}>
         <Text style={styles.cardTitle}>Zoeken</Text>
@@ -250,10 +252,10 @@ const HomeScreen = ({ route }) => {
 
       <View style={styles.toolsRow}>
         <View style={styles.switchCard}>
-          <Text style={styles.controlTitle}>Donkere modus</Text>
+          <Text style={styles.controlTitle}>Banner tonen</Text>
           <Switch
-            value={isEnabled}
-            onValueChange={() => setIsEnabled(!isEnabled)}
+            value={showBanner}
+            onValueChange={() => setShowBanner(!showBanner)}
             trackColor={{ false: "#d9d9d9", true: "#1f4432" }}
             thumbColor="#ffffff"
           />
