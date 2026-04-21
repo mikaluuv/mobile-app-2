@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import ProductCard from "../components/ProductCard";
+import BlogCard from "../components/BlogCard";
 
 const WEBFLOW_TOKEN =
   "a687f68ff8a3e8dc0e2ed1459a5b49025f48939e0f99dbc476ad3b8337192893";
@@ -311,11 +312,10 @@ const HomeScreen = ({ route }) => {
 
       <View style={styles.grid}>
         {filteredBlogs.map((blog) => (
-          <ProductCard
+          <BlogCard
             key={`blog-${blog.id}`}
             title={blog.title}
             description={blog.description}
-            price={blog.price}
             image={blog.image}
             details={blog.details}
             type={blog.type}
