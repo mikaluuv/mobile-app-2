@@ -18,7 +18,7 @@ const ProductDetail = ({ route, navigation }) => {
       <StatusBar style="dark" />
 
       <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backText}>Terug</Text>
+        <Text style={styles.backText}>← Terug</Text>
       </Pressable>
 
       <Image
@@ -26,21 +26,29 @@ const ProductDetail = ({ route, navigation }) => {
         style={styles.image}
       />
 
-      <View style={styles.card}>
-        <Text style={styles.label}>
-          {isBlog ? "Blog details" : "Product details"}
-        </Text>
+      <View style={styles.mainCard}>
+        <View style={styles.topRow}>
+          <View style={styles.typeBadge}>
+            <Text style={styles.typeBadgeText}>
+              {isBlog ? "Blog details" : "Product details"}
+            </Text>
+          </View>
+
+          <Text style={styles.price}>{product?.price || "EUR 129.95"}</Text>
+        </View>
+
         <Text style={styles.title}>{product?.title || "Smart Sneaker"}</Text>
-        <Text style={styles.price}>{product?.price || "EUR 129.95"}</Text>
 
-        <Text style={styles.sectionTitle}>Beschrijving</Text>
-        <Text style={styles.description}>
-          {product?.description ||
-            "Stijlvolle sneaker met een moderne look voor dagelijks gebruik."}
-        </Text>
+        <View style={styles.sectionCard}>
+          <Text style={styles.sectionTitle}>Beschrijving</Text>
+          <Text style={styles.description}>
+            {product?.description ||
+              "Stijlvolle sneaker met een moderne look voor dagelijks gebruik."}
+          </Text>
+        </View>
 
-        <View style={styles.infoBox}>
-          <Text style={styles.infoTitle}>Alle details</Text>
+        <View style={styles.sectionCardAlt}>
+          <Text style={styles.sectionTitle}>Alle details</Text>
           <Text style={styles.infoText}>
             {product?.details ||
               "Deze sneaker combineert comfort, stijl en een sterke afwerking voor elke dag."}
@@ -53,15 +61,17 @@ const ProductDetail = ({ route, navigation }) => {
               <Text style={styles.quantityLabel}>Aantal</Text>
 
               <View style={styles.quantityControls}>
-                <View style={styles.quantityButton}>
+                <Pressable style={styles.quantityButton}>
                   <Text style={styles.quantityButtonText}>-</Text>
+                </Pressable>
+
+                <View style={styles.quantityValueBox}>
+                  <Text style={styles.quantityText}>1</Text>
                 </View>
 
-                <Text style={styles.quantityText}>1</Text>
-
-                <View style={styles.quantityButton}>
+                <Pressable style={styles.quantityButton}>
                   <Text style={styles.quantityButtonText}>+</Text>
-                </View>
+                </Pressable>
               </View>
             </View>
 
@@ -78,99 +88,109 @@ const ProductDetail = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#f3f4f6",
   },
   content: {
-    padding: 18,
+    padding: 16,
     paddingBottom: 36,
   },
   backButton: {
     alignSelf: "flex-start",
-    backgroundColor: "black",
-    paddingHorizontal: 18,
+    backgroundColor: "#ffffff",
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
+    paddingHorizontal: 14,
     paddingVertical: 10,
     borderRadius: 14,
     marginBottom: 16,
   },
   backText: {
-    color: "#f5f5f5",
+    color: "#111827",
     textAlign: "center",
     fontWeight: "700",
+    fontSize: 14,
   },
   image: {
     width: "100%",
-    height: 260,
-    borderRadius: 24,
-    marginBottom: 18,
+    height: 240,
+    borderRadius: 22,
+    marginBottom: 16,
+    backgroundColor: "#e5e7eb",
   },
-  card: {
+  mainCard: {
     backgroundColor: "#ffffff",
-    padding: 20,
-    borderRadius: 24,
-    shadowColor: "#000",
-    shadowOpacity: 0.08,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 6 },
-    elevation: 4,
+    padding: 18,
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
   },
-  label: {
-    color: "#black",
-    fontSize: 13,
+  topRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+    gap: 10,
+  },
+  typeBadge: {
+    backgroundColor: "#f3f4f6",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 12,
+  },
+  typeBadgeText: {
+    color: "#374151",
+    fontSize: 11,
     fontWeight: "800",
     textTransform: "uppercase",
-    marginBottom: 8,
-    letterSpacing: 0.8,
   },
   title: {
-    color: "black",
-    fontSize: 30,
+    color: "#111827",
+    fontSize: 28,
     fontWeight: "800",
-    marginBottom: 8,
+    marginBottom: 14,
   },
   price: {
     color: "#1f4432",
     fontWeight: "800",
-    fontSize: 20,
-    marginBottom: 18,
+    fontSize: 18,
+  },
+  sectionCard: {
+    backgroundColor: "#f9fafb",
+    borderRadius: 16,
+    padding: 14,
+    marginBottom: 14,
+  },
+  sectionCardAlt: {
+    backgroundColor: "#f3f4f6",
+    borderRadius: 16,
+    padding: 14,
+    marginBottom: 16,
   },
   sectionTitle: {
-    color: "#2f241f",
-    fontSize: 16,
+    color: "#111827",
+    fontSize: 15,
     fontWeight: "800",
     marginBottom: 6,
   },
   description: {
-    color: "grey",
-    fontSize: 15,
-    lineHeight: 22,
-    marginBottom: 16,
-  },
-  infoBox: {
-    backgroundColor: "#f6f6f6",
-    borderRadius: 18,
-    padding: 15,
-    marginBottom: 18,
-  },
-  infoTitle: {
-    fontWeight: "800",
-    fontSize: 16,
-    color: "black",
-    marginBottom: 6,
+    color: "#4b5563",
+    fontSize: 14,
+    lineHeight: 21,
   },
   infoText: {
-    color: "black",
+    color: "#374151",
     lineHeight: 21,
     fontSize: 14,
   },
   quantityBox: {
-    backgroundColor: "#f5f5f5",
-    borderRadius: 18,
-    padding: 15,
-    marginBottom: 18,
+    backgroundColor: "#f9fafb",
+    borderRadius: 16,
+    padding: 14,
+    marginBottom: 16,
   },
   quantityLabel: {
-    color: "black",
-    fontSize: 16,
+    color: "#111827",
+    fontSize: 15,
     fontWeight: "800",
     marginBottom: 10,
   },
@@ -178,33 +198,44 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    gap: 12,
   },
   quantityButton: {
     backgroundColor: "#1f4432",
-    width: 42,
-    height: 42,
+    width: 44,
+    height: 44,
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
   },
   quantityButtonText: {
-    color: "#1f4432",
+    color: "#ffffff",
     fontSize: 20,
     fontWeight: "800",
   },
+  quantityValueBox: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+    borderWidth: 1,
+    borderColor: "#d1d5db",
+    borderRadius: 12,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   quantityText: {
-    color: "#1f4432",
-    fontSize: 20,
+    color: "#111827",
+    fontSize: 18,
     fontWeight: "800",
   },
   buyButton: {
     backgroundColor: "#1f4432",
-    paddingVertical: 14,
-    borderRadius: 16,
+    paddingVertical: 15,
+    borderRadius: 14,
     alignItems: "center",
   },
   buyButtonText: {
-    color: "#fffaf5",
+    color: "#ffffff",
     fontWeight: "800",
     fontSize: 15,
   },

@@ -7,7 +7,6 @@ import {
   ScrollView,
   StyleSheet,
   TextInput,
-  Button,
   Switch,
   Image,
 } from "react-native";
@@ -165,7 +164,6 @@ const HomeScreen = ({ route }) => {
 
       return product.type === selectedCategory;
     })
-
     .sort((a, b) => {
       const priceA = Number.parseFloat(String(a.price).replace(/[^\d.]/g, ""));
       const priceB = Number.parseFloat(String(b.price).replace(/[^\d.]/g, ""));
@@ -191,79 +189,92 @@ const HomeScreen = ({ route }) => {
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <StatusBar style="dark" />
 
-      <View style={styles.hero}>
-        <Text style={styles.kicker}>Streetstep</Text>
-        <Text style={styles.title}>Onze sneakers en blogs</Text>
-        <Text style={styles.subtitle}>
-          Ontdek nieuwe sneakers en blogs die rechtstreeks uit je Webflow CMS
-          worden opgehaald.
-        </Text>
-
-        <Image
-          source={require("../assets/sne.webp")}
-          style={styles.heroImage}
-        />
+      <View style={styles.topBar}>
+        <View>
+          <Text style={styles.brand}>Streetstep</Text>
+          <Text style={styles.smallText}>Sneakers & blogs</Text>
+        </View>
       </View>
 
-      <Picker
-        selectedValue={selectedCategory}
-        onValueChange={(itemValue) => setSelectedCategory(itemValue)}
-        style={styles.picker}
-      >
-        <Picker.Item label="Alle categorieën" value="" />
-        <Picker.Item label="Sneakers" value="product" />
-        <Picker.Item label="Blogs" value="blog" />
-      </Picker>
+      <View style={styles.introBlock}>
+        <Text style={styles.pageTitle}>Ontdek jouw volgende pair.</Text>
+        <Text style={styles.pageSubtitle}>
+          Ontdek sneakers en blogs op één plek.
+        </Text>
+      </View>
 
-      <Picker
-        selectedValue={sortOption}
-        onValueChange={(itemValue) => setSortOption(itemValue)}
-        style={styles.picker}
-      >
-        <Picker.Item label="prijs oplopend" value="price-asc" />
-        <Picker.Item label="prijs aflopend" value="price-desc" />
-        <Picker.Item label="titel A-Z" value="title-asc" />
-        <Picker.Item label="titel Z-A" value="title-desc" />
-      </Picker>
-
-      <TextInput
-        placeholder="Zoek sneaker..."
-        placeholderTextColor="#8b7f76"
-        value={searchText}
-        onChangeText={setSearchText}
-        style={styles.search}
+      <Image
+        source={require("../assets/sne.webp")}
+        style={styles.bannerImage}
       />
 
-      <View style={styles.controls}>
-        <View>
-          <Text style={styles.controlTitle}>Donkere modus</Text>
-          <Text style={styles.controlText}>Demo-switch voor de opdracht</Text>
-        </View>
-
-        <Switch
-          value={isEnabled}
-          onValueChange={() => setIsEnabled(!isEnabled)}
-          trackColor={{ false: "#d9d9d9", true: "#1f4432" }}
-          thumbColor="#ffffff"
+      <View style={styles.searchCard}>
+        <Text style={styles.cardTitle}>Zoeken</Text>
+        <TextInput
+          placeholder="Zoek sneaker..."
+          placeholderTextColor="#8b7f76"
+          value={searchText}
+          onChangeText={setSearchText}
+          style={styles.search}
         />
       </View>
 
-      <Pressable style={styles.customButton} onPress={resetFilters}>
-        <Text style={styles.customButtonText}>Reset filters</Text>
-      </Pressable>
+      <View style={styles.filtersRow}>
+        <View style={styles.filterBox}>
+          <Text style={styles.filterLabel}>Categorie</Text>
+          <Picker
+            selectedValue={selectedCategory}
+            onValueChange={(itemValue) => setSelectedCategory(itemValue)}
+            style={styles.picker}
+          >
+            <Picker.Item label="Alle categorieën" value="" />
+            <Picker.Item label="Sneakers" value="product" />
+            <Picker.Item label="Blogs" value="blog" />
+          </Picker>
+        </View>
 
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>Populaire sneakers</Text>
-        <Text style={styles.sectionText}>
-          {isLoading
-            ? "Producten worden geladen vanuit Webflow..."
-            : "Klik op een kaart om de details van de sneaker te bekijken."}
-        </Text>
+        <View style={styles.filterBox}>
+          <Text style={styles.filterLabel}>Sorteren</Text>
+          <Picker
+            selectedValue={sortOption}
+            onValueChange={(itemValue) => setSortOption(itemValue)}
+            style={styles.picker}
+          >
+            <Picker.Item label="prijs oplopend" value="price-asc" />
+            <Picker.Item label="prijs aflopend" value="price-desc" />
+            <Picker.Item label="titel A-Z" value="title-asc" />
+            <Picker.Item label="titel Z-A" value="title-desc" />
+          </Picker>
+        </View>
       </View>
 
-      <Text style={styles.resultCount}>
-        {filteredProducts.length} sneakers gevonden
-      </Text>
+      <View style={styles.toolsRow}>
+        <View style={styles.switchCard}>
+          <Text style={styles.controlTitle}>Donkere modus</Text>
+          <Switch
+            value={isEnabled}
+            onValueChange={() => setIsEnabled(!isEnabled)}
+            trackColor={{ false: "#d9d9d9", true: "#1f4432" }}
+            thumbColor="#ffffff"
+          />
+        </View>
+
+        <Pressable style={styles.resetButton} onPress={resetFilters}>
+          <Text style={styles.resetButtonText}>Reset filters</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.sectionHeader}>
+        <View>
+          <Text style={styles.sectionTitle}>Populaire sneakers</Text>
+          <Text style={styles.sectionText}>
+            {isLoading
+              ? "Producten worden geladen vanuit Webflow..."
+              : "Klik op een kaart om de details van de sneaker te bekijken."}
+          </Text>
+        </View>
+        <Text style={styles.resultCount}>{filteredProducts.length}</Text>
+      </View>
 
       <View style={styles.grid}>
         {filteredProducts.map((product) => (
@@ -280,17 +291,16 @@ const HomeScreen = ({ route }) => {
       </View>
 
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>Sneaker blogs</Text>
-        <Text style={styles.sectionText}>
-          {isLoading
-            ? "Blogs worden geladen vanuit Webflow..."
-            : "Klik op een blog om de volledige inhoud te bekijken."}
-        </Text>
+        <View>
+          <Text style={styles.sectionTitle}>Sneaker blogs</Text>
+          <Text style={styles.sectionText}>
+            {isLoading
+              ? "Blogs worden geladen vanuit Webflow..."
+              : "Klik op een blog om de volledige inhoud te bekijken."}
+          </Text>
+        </View>
+        <Text style={styles.resultCount}>{filteredBlogs.length}</Text>
       </View>
-
-      <Text style={styles.resultCount}>
-        {filteredBlogs.length} blogs gevonden
-      </Text>
 
       <View style={styles.grid}>
         {filteredBlogs.map((blog) => (
@@ -312,122 +322,169 @@ const HomeScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#f3f4f6",
   },
   content: {
-    padding: 18,
+    padding: 16,
     paddingBottom: 36,
   },
-  hero: {
-    backgroundColor: "#ffffff",
-    borderRadius: 28,
-    padding: 18,
+  topBar: {
     marginBottom: 18,
-    shadowColor: "#000",
-    shadowOpacity: 0.08,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 6 },
-    elevation: 4,
   },
-  kicker: {
-    color: "black",
+  brand: {
+    fontSize: 22,
+    fontWeight: "800",
+    color: "#111827",
+  },
+  smallText: {
     fontSize: 13,
-    fontWeight: "800",
-    textTransform: "uppercase",
-    marginBottom: 6,
-    letterSpacing: 0.8,
+    color: "#6b7280",
+    marginTop: 2,
   },
-  title: {
-    color: "#1f4432",
-    fontSize: 30,
+  topBadge: {
+    backgroundColor: "#1f4432",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 14,
+  },
+  topBadgeText: {
+    color: "#ffffff",
+    fontSize: 12,
     fontWeight: "800",
+  },
+  introBlock: {
+    marginBottom: 14,
+  },
+  pageTitle: {
+    fontSize: 32,
+    lineHeight: 38,
+    fontWeight: "800",
+    color: "#111827",
     marginBottom: 8,
+    maxWidth: 260,
   },
-  subtitle: {
-    color: "black",
+  pageSubtitle: {
     fontSize: 15,
     lineHeight: 22,
-    marginBottom: 16,
+    color: "#4b5563",
+    maxWidth: 320,
   },
-  heroImage: {
+  bannerImage: {
     width: "100%",
-    height: 190,
-    borderRadius: 20,
+    height: 180,
+    borderRadius: 22,
+    marginBottom: 16,
+    backgroundColor: "#e5e7eb",
   },
-  picker: {
+  searchCard: {
     backgroundColor: "#ffffff",
+    borderRadius: 20,
+    padding: 14,
     marginBottom: 14,
-    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
+  },
+  cardTitle: {
+    fontSize: 15,
+    fontWeight: "800",
+    color: "#111827",
+    marginBottom: 10,
   },
   search: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#f3f4f6",
     paddingHorizontal: 14,
     paddingVertical: 14,
-    borderRadius: 16,
-    marginBottom: 14,
-    color: "#2f241f",
+    borderRadius: 14,
+    color: "#111827",
     fontSize: 15,
   },
-  controls: {
+  filtersRow: {
+    gap: 12,
+    marginBottom: 14,
+  },
+  filterBox: {
+    backgroundColor: "#ffffff",
+    borderRadius: 20,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
+  },
+  filterLabel: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#111827",
+    marginBottom: 6,
+  },
+  picker: {
+    backgroundColor: "#f3f4f6",
+    borderRadius: 14,
+  },
+  toolsRow: {
+    gap: 12,
+    marginBottom: 22,
+  },
+  switchCard: {
     backgroundColor: "#ffffff",
     borderRadius: 18,
-    padding: 16,
-    marginBottom: 14,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
   controlTitle: {
-    color: "#1f4432",
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#111827",
+  },
+  resetButton: {
+    backgroundColor: "#1f4432",
+    borderRadius: 16,
+    paddingVertical: 14,
+    alignItems: "center",
+  },
+  resetButtonText: {
+    color: "#ffffff",
     fontWeight: "700",
     fontSize: 15,
-    marginBottom: 3,
-  },
-  controlText: {
-    color: "black",
-    fontSize: 12,
-  },
-  buttonWrap: {
-    borderRadius: 16,
-    overflow: "hidden",
-    marginBottom: 18,
   },
   sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
     marginBottom: 14,
+    gap: 10,
   },
   sectionTitle: {
-    color: "#1f4432",
-    fontSize: 24,
+    color: "#111827",
+    fontSize: 22,
     fontWeight: "800",
     marginBottom: 4,
   },
   sectionText: {
-    color: "#1f4432",
+    color: "#4b5563",
     fontSize: 14,
     lineHeight: 20,
+    maxWidth: 280,
+  },
+  resultCount: {
+    backgroundColor: "#e5e7eb",
+    color: "#111827",
+    fontSize: 14,
+    fontWeight: "800",
+    minWidth: 38,
+    textAlign: "center",
+    paddingVertical: 9,
+    borderRadius: 19,
+    overflow: "hidden",
+    marginTop: 4,
   },
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-  },
-  customButton: {
-    backgroundColor: "#1f4432",
-    paddingVertical: 14,
-    borderRadius: 16,
-    alignItems: "center",
-  },
-
-  customButtonText: {
-    color: "white",
-    fontWeight: "700",
-    fontSize: 16,
-  },
-  resultCount: {
-    color: "#1f4432",
-    fontSize: 13,
-    fontWeight: "600",
-    marginTop: 6,
+    marginBottom: 18,
   },
 });
 

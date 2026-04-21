@@ -13,16 +13,37 @@ export default function ProductCard({
   const navigation = useNavigation();
 
   return (
-    <View style={styles.card}>
+    <Pressable
+      style={styles.card}
+      onPress={() =>
+        navigation.navigate("Details", {
+          product: { title, description, price, image, details, type },
+        })
+      }
+    >
       <Image
         source={image || require("../assets/sne.webp")}
         style={styles.image}
       />
 
       <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
-        <Text style={styles.price}>{price}</Text>
+        <Text numberOfLines={1} style={styles.title}>
+          {title}
+        </Text>
+
+        <Text numberOfLines={2} style={styles.description}>
+          {description}
+        </Text>
+
+        <View style={styles.bottomRow}>
+          <Text style={styles.price}>{price}</Text>
+
+          <View style={styles.tag}>
+            <Text style={styles.tagText}>
+              {type === "blog" ? "Blog" : "Sneaker"}
+            </Text>
+          </View>
+        </View>
 
         <Pressable
           style={styles.button}
@@ -33,63 +54,86 @@ export default function ProductCard({
           }
         >
           <Text style={styles.buttonText}>
-            {type === "blog" ? "Lees blog" : "Bekijk product"}
+            {type === "blog" ? "Lees" : "Bekijk"}
           </Text>
         </Pressable>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#ffffff",
-    borderRadius: 22,
+    borderRadius: 18,
     width: "48%",
     marginBottom: 16,
     overflow: "hidden",
-    shadowColor: "#000",
-    shadowOpacity: 0.08,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 6 },
-    elevation: 4,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
   },
+
   image: {
     width: "100%",
-    height: 140,
-    backgroundColor: "#f6f6f6",
+    height: 120,
+    backgroundColor: "#f3f4f6",
   },
+
   content: {
-    padding: 14,
+    padding: 12,
   },
+
   title: {
-    fontWeight: "800",
-    fontSize: 16,
-    color: "black",
-    marginBottom: 7,
+    fontWeight: "700",
+    fontSize: 15,
+    color: "#111827",
+    marginBottom: 4,
   },
+
   description: {
-    color: "black",
-    fontSize: 13,
-    lineHeight: 18,
-    minHeight: 52,
+    color: "#6b7280",
+    fontSize: 12,
+    lineHeight: 16,
+    marginBottom: 8,
+  },
+
+  bottomRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 10,
   },
+
   price: {
     color: "#1f4432",
     fontWeight: "800",
-    fontSize: 16,
-    marginBottom: 12,
+    fontSize: 14,
   },
+
+  tag: {
+    backgroundColor: "#f3f4f6",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 10,
+  },
+
+  tagText: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: "#374151",
+  },
+
   button: {
-    backgroundColor: "#1f4432",
-    paddingVertical: 11,
-    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#1f4432",
+    paddingVertical: 8,
+    borderRadius: 12,
   },
+
   buttonText: {
-    color: "#fffaf5",
+    color: "#1f4432",
     textAlign: "center",
     fontWeight: "700",
-    fontSize: 13,
+    fontSize: 12,
   },
 });
