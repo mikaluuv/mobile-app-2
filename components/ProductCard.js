@@ -9,10 +9,11 @@ export default function ProductCard({
   image,
   details,
   type,
+  category,
 }) {
   const navigation = useNavigation();
   const screenName = type === "blog" ? "BlogDetails" : "Details";
-  const item = { title, description, price, image, details, type };
+  const item = { title, description, price, image, details, type, category };
 
   return (
     <Pressable

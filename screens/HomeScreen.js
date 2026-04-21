@@ -111,6 +111,7 @@ const HomeScreen = ({ route }) => {
               item.product?.fieldData?.description ||
               "Geen details beschikbaar.",
             price: formatPrice(item.skus?.[0]?.fieldData?.price),
+            category: "Sneakers",
             image: getImageSource(
               item.skus?.[0]?.fieldData?.["main-image"]?.url,
               item.product?.fieldData?.["main-image"]?.url,
@@ -164,7 +165,7 @@ const HomeScreen = ({ route }) => {
         return true;
       }
 
-      return product.type === selectedCategory;
+      return product.category === selectedCategory;
     })
     .sort((a, b) => {
       const priceA = Number.parseFloat(String(a.price).replace(/[^\d.]/g, ""));
@@ -232,8 +233,11 @@ const HomeScreen = ({ route }) => {
             style={styles.picker}
           >
             <Picker.Item label="Alle categorieën" value="" />
-            <Picker.Item label="Sneakers" value="product" />
-            <Picker.Item label="Blogs" value="blog" />
+            <Picker.Item label="Lifestyle" value="Lifestyle" />
+            <Picker.Item label="Minimalistisch" value="Minimalistisch" />
+            <Picker.Item label="Streetwear" value="Streetwear" />
+            <Picker.Item label="Retro" value="Retro" />
+            <Picker.Item label="Sneakers" value="Sneakers" />
           </Picker>
         </View>
 
@@ -294,6 +298,7 @@ const HomeScreen = ({ route }) => {
             image={product.image}
             details={product.details}
             type={product.type}
+            category={product.category}
           />
         ))}
       </View>
