@@ -11,13 +11,15 @@ export default function ProductCard({
   type,
 }) {
   const navigation = useNavigation();
+  const screenName = type === "blog" ? "BlogDetails" : "Details";
+  const item = { title, description, price, image, details, type };
 
   return (
     <Pressable
       style={styles.card}
       onPress={() =>
-        navigation.navigate("Details", {
-          product: { title, description, price, image, details, type },
+        navigation.navigate(screenName, {
+          product: item,
         })
       }
     >
@@ -48,8 +50,8 @@ export default function ProductCard({
         <Pressable
           style={styles.button}
           onPress={() =>
-            navigation.navigate("Details", {
-              product: { title, description, price, image, details, type },
+            navigation.navigate(screenName, {
+              product: item,
             })
           }
         >
