@@ -9,6 +9,7 @@ import {
   TextInput,
   Switch,
   Image,
+  Button,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import ProductCard from "../components/ProductCard";
@@ -264,6 +265,10 @@ const HomeScreen = ({ route }) => {
         <Pressable style={styles.resetButton} onPress={resetFilters}>
           <Text style={styles.resetButtonText}>Reset filters</Text>
         </Pressable>
+
+        <View style={styles.buttonBox}>
+          <Button title="Toon alles" color="#1f4432" onPress={resetFilters} />
+        </View>
       </View>
 
       <View style={styles.sectionHeader}>
@@ -450,6 +455,13 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontWeight: "700",
     fontSize: 15,
+  },
+  buttonBox: {
+    backgroundColor: "#ffffff",
+    borderRadius: 16,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
   },
   sectionHeader: {
     flexDirection: "row",
