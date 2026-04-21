@@ -13,6 +13,8 @@ const ProductDetail = ({ route, navigation }) => {
   const { product } = route.params || {};
   const isBlog = product?.type === "blog";
   const [quantity, setQuantity] = useState(1);
+  const price = Number(product?.price?.replace("USD ", "")) || 0;
+  const totalPrice = price * quantity;
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
@@ -90,6 +92,12 @@ const ProductDetail = ({ route, navigation }) => {
                   <Text style={styles.quantityButtonText}>+</Text>
                 </Pressable>
               </View>
+            </View>
+
+            <View style={styles.totalBox}>
+              <Text style={styles.totalText}>
+                Totaalprijs: USD {totalPrice.toFixed(2)}
+              </Text>
             </View>
 
             <Pressable style={styles.buyButton}>
@@ -244,6 +252,18 @@ const styles = StyleSheet.create({
     color: "#111827",
     fontSize: 18,
     fontWeight: "800",
+  },
+  totalBox: {
+    backgroundColor: "#f3f4f6",
+    borderRadius: 14,
+    padding: 14,
+    marginBottom: 16,
+  },
+  totalText: {
+    color: "#111827",
+    fontSize: 16,
+    fontWeight: "800",
+    textAlign: "center",
   },
   buyButton: {
     backgroundColor: "#1f4432",
